@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+
+{% block page_content %}
+	<ul>
+	{% for mineral in minerals %}
+		<a href="#"><li>{{ mineral.name|title }}</a>
+	{% endfor %}
+	</ul>
+{% endblock %}
