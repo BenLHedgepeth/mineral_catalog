@@ -3,10 +3,8 @@
 import os
 import sys
 
-from os.path import abspath, dirname
-sys.path.insert(1, dirname(dirname(abspath(__file__))))
-print(sys.path)
-
+# from os.path import abspath, dirname
+# sys.path.insert(1, dirname(dirname(abspath(__file__))))
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mineral_catalog.settings')

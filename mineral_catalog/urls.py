@@ -15,9 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from . import views
+from . import views as main_views
+from minerals import views as mineral_views
+
+minerals_patterns = ([
+	path('', mineral_views.MineralsPage.as_view(), name="listing_page"),
+	path('<str:mineral>/', mineral_views.MineralPage.as_view(), name="class")
+], 'minerals')
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('minerals.urls')),
+    path('', include(minerals_patterns)),
 ]

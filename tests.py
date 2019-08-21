@@ -1,19 +1,16 @@
-import unittest
 
 
 from django.test import TestCase
+from django.http import Http404
 from django.template.backends.django import Template
 
-from helpers import load_page_template
-
 class TestGetTemplate(TestCase):
-    pass
 
-    # def setUp(self):
-    #     self.templates = {
-    #             'valid' : 'index.html',
-    #             'invalid' : 'idex.html'
-    #         }
+    def setUp(self):
+        self.templates = {
+                'valid' : 'index.html',
+                'invalid' : 'idex.html'
+            }
 
     # def test_load_page_template_success(self):
     #     ''' 
@@ -30,6 +27,22 @@ class TestGetTemplate(TestCase):
     #     with self.assertRaises(FileNotFoundError):
     #         load_page_template(self.templates['invalid'])
  
+
+
+# Create your tests here.
+
+# class ViewNotFound(TestCase):
+#     '''
+#         To verify that a browswer receives a HTTP 404 
+#         response when a path cannot be served due to
+#         it not matching any url stored in the server.     
+#     '''
+
+#     test_data = '/home'
+
+#     def test_view_response_404(self):
+#         with self.assertRaises(Http404):
+#             self.client.get('/home_page')
 
 
 

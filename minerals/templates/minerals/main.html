@@ -1,9 +1,15 @@
 {% extends 'index.html' %}
 
 {% block page_content %}
-	<ul>
-	{% for mineral in minerals %}
-		<a href="#"><li>{{ mineral.name|title }}</a>
-	{% endfor %}
-	</ul>
+    <div class="grid-100">   
+        <ul class="minerals__container">
+        {% for mineral in minerals %}
+            <li class="minerals__items">
+                <a href="{% url 'minerals:class' mineral.name|slugify %}" class="minerals__anchor">
+                    <p>{{ mineral.name|title }}</p>
+                </a>
+            </li>
+        {% endfor %}  
+        </ul>
+    </div>
 {% endblock %}
