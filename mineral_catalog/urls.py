@@ -22,10 +22,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 minerals_patterns = ([
-	path('', mineral_views.MineralsPage.as_view(), name="listing_page"),
-	path('<str:mineral>/', mineral_views.MineralPage.as_view(), name="class"),
+    path('', mineral_views.MineralsPage.as_view(), name="listing_page"),
+    path('<str:mineral>/', mineral_views.MineralPage.as_view(), name="class"),
     path('random_mineral/', mineral_views.RandomPage.as_view(), name="random")
-], 'minerals')
+    ], 'minerals'
+)
 
 
 urlpatterns = [

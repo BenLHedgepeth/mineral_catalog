@@ -33,7 +33,11 @@ class MineralPage(View):
         else:
             # random_mineral = choice(Mineral.objects.all())
             try:
-                chosen_mineral = Mineral.objects.filter(name__contains=mineral).values()[0]
+                import pdb; pdb.set_trace()
+                print("Mineral to query the database: 'Pääkkönenite'")
+                chosen_mineral = Mineral.objects.filter(name__contains='Pääkkönenite').values().first()
+
+                # chosen_mineral = Mineral.objects.filter(name__contains='Pääkkönenite').values().first()
             except Mineral.DoesNotExist:
                 raise Http404
             else:
