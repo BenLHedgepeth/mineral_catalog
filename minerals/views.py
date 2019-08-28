@@ -18,6 +18,7 @@ class MineralsPage(View):
             raise Http404("Not here")
         else:
             stored_minerals = Mineral.objects.all()
+
             return HttpResponse(
                 minerals_page.render({'minerals' : stored_minerals})
             )
@@ -30,7 +31,7 @@ class MineralPage(View):
         except TemplateDoesNotExist:
             raise Http404("Wrong")
         else:
-            random_mineral = choice(Mineral.objects.all())
+            # random_mineral = choice(Mineral.objects.all())
             try:
                 chosen_mineral = Mineral.objects.filter(name__contains=mineral).values()[0]
             except Mineral.DoesNotExist:
@@ -41,8 +42,7 @@ class MineralPage(View):
                     if key != "id" and value != "":
                         mineral_attrs.update({key : value})
                 return HttpResponse(mineral_page.render({
-                        'mineral' : mineral_attrs,
-                        'random' : random_mineral.name
+                        'mineral' : mineral_attrs
                         }
                     )
                 )
