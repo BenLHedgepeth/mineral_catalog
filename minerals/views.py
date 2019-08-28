@@ -1,10 +1,11 @@
 # from django.shortcuts import render
 
-
+from random import choice
 
 from django.views import View
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import TemplateDoesNotExist
+from django.urls import reverse
 from django.template.loader import get_template
 from .models import Mineral
 
@@ -18,27 +19,42 @@ class MineralsPage(View):
         else:
             stored_minerals = Mineral.objects.all()
             return HttpResponse(
-                minerals_page.render({'minerals' : stored_minerals}, request)
+                minerals_page.render({'minerals' : stored_minerals})
             )
 
 class MineralPage(View):
     
     def get(self, request, mineral):
-
         try:
             mineral_page = get_template('minerals/detail.html')
         except TemplateDoesNotExist:
             raise Http404("Wrong")
         else:
+            random_mineral = choice(Mineral.objects.all())
             try:
-                chosen_mineral = Mineral.objects.filter(name__contains=mineral).values()
+                chosen_mineral = Mineral.objects.filter(name__contains=mineral).values()[0]
             except Mineral.DoesNotExist:
                 raise Http404
             else:
                 mineral_attrs = {}
-                print(chosen_mineral)
-                # for key, value in chosen_mineral.items():
-                #     if value != "":
-                #         mineral_attrs[key] = value
-                return mineral_page.render({'mineral' : mineral_attrs}, request)
+                for key, value in chosen_mineral.items():
+                    if key != "id" and value != "":
+                        mineral_attrs.update({key : value})
+                return HttpResponse(mineral_page.render({
+                        'mineral' : mineral_attrs,
+                        'random' : random_mineral.name
+                        }
+                    )
+                )
+                
 
+class RandomPage(View):
+
+    def get(self, request):
+
+        return HttpResponse(
+            reverse(
+                "minerals:class", 
+                kwargs={'mineral' : "Abernathyite"}
+                )
+            )
