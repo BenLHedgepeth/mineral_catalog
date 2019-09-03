@@ -1,16 +1,20 @@
 {% extends 'index.html' %}
-{% load mineral_names %}
 
 {% block page_content %}
+<div class="bounds">
+    {% block page_header %}
+        {{ block.super }}
+    {% endblock page_header %}
     <div class="grid-100">   
         <ul class="minerals__container">
         {% for mineral in minerals %}
             <li class="minerals__items">
-                <a href="{% url 'minerals:class' mineral.name|url_slug|title %}" class="minerals__anchor">
+                <a href="{% url 'minerals:class' mineral.name|title %}" class="minerals__anchor">
                     <p>{{ mineral.name|title }}</p>
                 </a>
             </li>
         {% endfor %}  
         </ul>
     </div>
+</div>
 {% endblock %}

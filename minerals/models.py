@@ -1,4 +1,5 @@
 from django.db import models
+import re
 
 # Create your models here.
 class Mineral(models.Model):
@@ -25,4 +26,9 @@ class Mineral(models.Model):
 
 
 def __str__(self):
-    return self.name
+
+    sep = re.search(r',', self.name)
+    if sep:
+        name = re.match(r'\w+', name)[0]
+    
+    return self.name.title()

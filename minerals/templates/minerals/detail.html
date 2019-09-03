@@ -1,10 +1,13 @@
-
 {% extends 'index.html' %}
 {% load static %}
 
 {% block page_content %}
+<div class="bounds bounds--small">
+    {% block page_header %}
+        {{ block.super }}
+    {% endblock page_header %}
     <div class="grid-100 mineral__container">
-        <h1 class="mineral__name">{{ mineral.name }}</h1>
+        <h1 class="mineral__name">{{ mineral.name|title }}</h1>
         <div class="mineral__image-bg">
         {% with image_type='minerals/images/'|add:mineral.image_filename %}
             <img class="mineral__image" src="{% static image_type %}">
@@ -12,26 +15,22 @@
         {% if "image_caption" in mineral %}
             <p class="mineral__caption">{{ mineral.image_caption }}</p>
         {% endif %}
-
-        </div>
-        <div class="mineral__table-container">
-            <table class="mineral__table">
-            {% for key, value in mineral.items %}
-                <tr>    
-                {% if key != 'name' and key != 'image_filename' and key != "image_caption"%}
-                    <td class="mineral__category">{{ key|title }}</td>
-                    {% if key == 'formula' %}
-                        <td class="mineral_formula">{{ mineral.formula }}</td>
-                    {% else %}
-                        <td>{{ value }}</td>
-                    {% endif %}
+    </div>
+    <div class="mineral__table-container">
+        <table class="mineral__table">
+        {% for key, value in mineral.items %}
+            <tr>    
+            {% if key != 'name' and key != 'image_filename' and key != "image_caption"%}
+                <td class="mineral__category">{{ key|title }}</td>
+                {% if key == 'formula' %}
+                    <td class="mineral_formula">{{ mineral.formula }}</td>
+                {% else %}
+                    <td>{{ value }}</td>
                 {% endif %}
-                </tr>
-            {% endfor %}
-            </table>
-        </div>
+            {% endif %}
+            </tr>
+        {% endfor %}
+        </table>
     </div>
-    <div class="minerals_random">
-        <a class="minerals__anchor" href="{% url 'minerals:class' mineral.name %}">Show random mineral</a>   
-    </div>
-{% endblock %}
+</div>
+{% endblock page_content %}
