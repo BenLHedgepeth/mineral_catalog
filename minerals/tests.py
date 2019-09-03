@@ -20,8 +20,8 @@ class TestUrlConfig(TestCase):
         self.assertEqual(response.status_code, 404)
 
     def test_view_response_200(self):
-    	response = self.client.get('/')
-    	self.assertEqual(response.status_code, 200)
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
 
 
 

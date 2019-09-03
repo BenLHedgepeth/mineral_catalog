@@ -2,17 +2,17 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}">
-		<title>Mineral Catalog - {% block subtitle %}{% endblock %}</title>
-	</head>
-	<body>
-    	{% block page_content %}
+    <head>
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}">
+        <title>Mineral Catalog - {% block subtitle %}{% endblock %}</title>
+    </head>
+    <body>
+        {% block page_content %}
             {% block page_header %}
                 <div class="grid-100">
                     <a href="{% url 'minerals:listing_page' %}">
@@ -29,6 +29,6 @@
         {% endblock page_content %}
         <div class="minerals__random">
             <a class="minerals__anchor" href="{% url 'minerals:class' random.name %}">Show random mineral</a>   
-        </div>	
-	</body>
+        </div>  
+    </body>
 </html>
