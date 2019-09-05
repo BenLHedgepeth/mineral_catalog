@@ -3,7 +3,7 @@
 from random import choice
 
 from django.views import View
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.template import TemplateDoesNotExist
 from django.urls import reverse
 from django.template.loader import get_template
@@ -38,10 +38,15 @@ class MineralPage(View):
             raise Http404("Wrong")
         else:
             random_mineral = choice(Mineral.objects.all())
-            try:
-                chosen_mineral = Mineral.objects.filter(
+
+            '''
+                filter() will not catch Model.DoesNotExist
+                exception inside a try block. If there is
+                no model instance returned, the result is None.
+            '''        
+            chosen_mineral = Mineral.objects.filter(
                     name__icontains=mineral).values().first()
-            except Mineral.DoesNotExist:
+            if not chosen_mineral:
                 raise Http404
             else:
                 mineral_attrs = {}

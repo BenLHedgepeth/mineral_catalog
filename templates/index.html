@@ -27,8 +27,10 @@
                 </div>
             {% endblock page_header %}
         {% endblock page_content %}
+        {% block footer %}
         <div class="minerals__random">
             <a class="minerals__anchor" href="{% url 'minerals:class' random.name %}">Show random mineral</a>   
         </div>  
+        {% endblock footer %}
     </body>
 </html>
