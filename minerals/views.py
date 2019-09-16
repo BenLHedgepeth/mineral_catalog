@@ -21,16 +21,13 @@ class MineralsPage(View):
         else:
             stored_minerals = Mineral.objects.all()
 
-            return HttpResponse(
-                minerals_page.render({
-                    'minerals' : stored_minerals,
-                    'random' : choice(stored_minerals)
-                    })
-            )
+            return HttpResponse(minerals_page.render({
+                    'minerals': stored_minerals,
+                    'random': choice(stored_minerals)
+                }))
 
 
 class MineralPage(View):
-    
     def get(self, request, mineral):
         try:
             mineral_page = get_template('minerals/detail.html')
@@ -42,8 +39,7 @@ class MineralPage(View):
             '''
                 filter() will not catch Model.DoesNotExist
                 exception inside a try block. If there is
-                no model instance returned, the result is None.
-            '''        
+                no model instance returned, the result is None.'''
             chosen_mineral = Mineral.objects.filter(
                     name__icontains=mineral).values().first()
             if not chosen_mineral:
@@ -52,12 +48,8 @@ class MineralPage(View):
                 mineral_attrs = {}
                 for key, value in chosen_mineral.items():
                     if key != "id" and value != "":
-                        mineral_attrs.update({key : value})
+                        mineral_attrs.update({key: value})
                 return HttpResponse(mineral_page.render({
-                        'mineral' : mineral_attrs,
-                        'random' : random_mineral
-                        }
-                    )
-                )
-                
-
+                    'mineral': mineral_attrs,
+                    'random': random_mineral
+                    }))

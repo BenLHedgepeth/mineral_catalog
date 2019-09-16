@@ -1,5 +1,5 @@
 from django.db import models
-import re
+
 
 # Create your models here.
 class Mineral(models.Model):
@@ -21,14 +21,9 @@ class Mineral(models.Model):
     optical_properties = models.CharField(max_length=255, null="")
     refractive_index = models.CharField(max_length=255, null="")
     crystal_habit = models.CharField(max_length=255, null="")
-    specific_gravity = models.CharField(max_length=255, null="") 
+    specific_gravity = models.CharField(max_length=255, null="")
     group = models.CharField(max_length=255, null="")
 
 
 def __str__(self):
-
-    sep = re.search(r',', self.name)
-    if sep:
-        name = re.match(r'\w+', name)[0]
-    
-    return self.name.title()
+    return self.name
